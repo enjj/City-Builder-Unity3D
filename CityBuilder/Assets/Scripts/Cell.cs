@@ -1,19 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cell
+public class Cell 
 {
-    private GameObject structureModel = null;
-    private bool isTaken = false;
+    GameObject structureModel = null;
+    bool isTaken = false;
 
-    public bool IsTaken { get => isTaken; set => isTaken = value; }
+    public bool IsTaken { get => isTaken;}
 
-    public void SetConstruction(GameObject structureModel) {
+    public void SetConstruction(GameObject structureModel)
+    {
         if (structureModel == null)
             return;
         this.structureModel = structureModel;
         this.isTaken = true;
     }
-
 }
