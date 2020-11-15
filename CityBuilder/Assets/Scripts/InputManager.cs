@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,8 +7,8 @@ using UnityEngine.UIElements;
 
 public class InputManager : MonoBehaviour {
 
+    private Action<Vector3> OnPointerDownHandler;
     public LayerMask mouseInputMask;
-    //public GameObject buildingPrefab;
 
     void Update() {
         GetInput();
@@ -19,13 +20,17 @@ public class InputManager : MonoBehaviour {
             RaycastHit hit;
             if (Physics.Raycast(ray.origin,ray.direction,out hit,Mathf.Infinity,mouseInputMask)) {
                 Vector3 position = hit.point - transform.position;
-                Debug.Log(position);
+                OnPointerDownHandler?.Invoke(position);
             }
         }
     }
 
-   
-//    public void CreateBuilding(Vector3 gridPos) {
-//        Instantiate(buildingPrefab, gridPos, Quaternion.identity);
-//    }
+    public void AddListenerOnPointerDownEvent(Action<Vector3> listener) {
+        OnPointerDownHandler += listener;
+    }
+
+    public void RemoveListenerOnPointerDownEvent(Action<Vector3> listener) {
+        OnPointerDownHandler -= listener;
+    }
+
 }
