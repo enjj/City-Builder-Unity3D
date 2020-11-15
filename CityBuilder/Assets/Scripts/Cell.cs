@@ -10,8 +10,10 @@ public class Cell
     public bool IsTaken { get => isTaken; set => isTaken = value; }
 
     public void SetConstruction(GameObject structureModel) {
+        if (structureModel == null)
+            return;
         this.structureModel = structureModel;
-        this.isTaken = true; 
+        this.isTaken = true;
     }
 
 }
