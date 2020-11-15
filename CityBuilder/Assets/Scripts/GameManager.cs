@@ -10,16 +10,20 @@ public class GameManager : MonoBehaviour
     public InputManager inputManager;
     private GridStructure grid;
     private int cellSize = 3;
+    public int width, length;
 
     // Start is called before the first frame update
     void Start()
     {
-        grid = new GridStructure(cellSize);
+        grid = new GridStructure(cellSize,width,length);
         inputManager.AddListenerOnPointerDownEvent(HandleInput);
     }
 
     private void HandleInput(Vector3 position) {
-        placementManager.CreateBuilding(grid.CalculateGridPosition(position));
+        Vector3 gridPosition = grid.CalculateGridPosition(position);
+        if (grid.IsCellTaken(gridPosition) == false) {
+            placementManager.CreateBuilding(gridPosition);
+        }
     }
 
     // Update is called once per frame

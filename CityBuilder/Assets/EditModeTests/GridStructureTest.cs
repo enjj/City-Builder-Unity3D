@@ -11,7 +11,7 @@ namespace Tests {
 
         [OneTimeSetUp]
         public void Init() {
-            structure = new GridStructure(3);
+            structure = new GridStructure(3,100,100);
         }
 
         [Test]

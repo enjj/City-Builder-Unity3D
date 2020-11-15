@@ -1,0 +1,17 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Cell
+{
+    private GameObject structureModel = null;
+    private bool isTaken = false;
+
+    public bool IsTaken { get => isTaken; set => isTaken = value; }
+
+    public void SetConstruction(GameObject structureModel) {
+        this.structureModel = structureModel;
+        this.isTaken = true; 
+    }
+
+}
