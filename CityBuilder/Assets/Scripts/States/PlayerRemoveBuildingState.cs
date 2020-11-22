@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBuildingSingleStructureState : PlayerState
+public class PlayerRemoveBuildingState : PlayerState
 {
     BuildingManager buildingManager;
-    public PlayerBuildingSingleStructureState(GameManager gameManager, BuildingManager buildingManager) : base(gameManager)
+    public PlayerRemoveBuildingState(GameManager gameManager, BuildingManager buildingManager) : base(gameManager)
     {
         this.buildingManager = buildingManager;
     }
+
+    public override void OnCancle()
+    {
+        this.gameManager.TransitionToState(this.gameManager.selectionState);
+    }
+
     public override void OnInputPanChange(Vector3 position)
     {
         return;
@@ -26,17 +32,11 @@ public class PlayerBuildingSingleStructureState : PlayerState
 
     public override void OnInputPointerDown(Vector3 position)
     {
-        
-        buildingManager.PlaceStructureAt(position);
+        this.buildingManager.RemoveBuildingAt(position);
     }
 
     public override void OnInputPointerUp()
     {
         return;
-    }
-
-    public override void OnCancle()
-    {
-        this.gameManager.TransitionToState(this.gameManager.selectionState);
-    }
+    } 
 }
